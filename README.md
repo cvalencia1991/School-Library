@@ -38,7 +38,7 @@
 
 # 📖 OPP-School Library <a name="about-project"></a>
 
-> In this project my colleague and I prepared a databse from a schema that was provided. We also join the tables to form many-to-many relationships.
+> In this project we apply the operation of  Object Oriented Programming Using Ruby language.
 
 ## 🛠 Built With <a name="built-with"></a>
 
