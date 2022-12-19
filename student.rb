@@ -1,13 +1,12 @@
-require'./person'
+require './person'
 
 class Student < Person
-  def initialize(*person,classroom)
+  def initialize(*person, classroom)
     super(*person)
     @classroom = classroom
   end
 
-
   def play_hooky
-  '¯\(ツ)/¯'
+    '¯\(ツ)/¯'
   end
 end
