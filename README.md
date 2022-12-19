@@ -55,15 +55,15 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **[key_feature_1]**
-- **[key_feature_2]**
-- **[key_feature_3]**
+- **Explain the difference between classes and objects.**
+- **Implement classes and objects in Ruby.**
+- **Run a program using the command line.**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Schema
 
-![drawSQL-export-2022-12-13_16_08](https://user-images.githubusercontent.com/107327344/207443897-aa593a12-e3e8-4338-b82b-a712cb479915.png)
+![image](https://user-images.githubusercontent.com/107327344/208512991-880d209a-f9c8-48da-a46b-2e3864fbec55.png)
 
 
 ## 🚀 Live Demo <a name="live-demo"></a>
@@ -164,12 +164,6 @@ Example:
 - GitHub: [https://github.com/cvalencia1991](https://github.com/cvalencia1991)
 - Twitter: [https://twitter.com/cvalenciaguilar](@cvalenciaguilar)
 - LinkedIn: [https://www.linkedin.com/in/cvalenciaguilar/](www.linkedin.com/in/cvalenciaguilar)
-
-👤 **Kelvin Benjamin**
-
-- GitHub: [@Kelvin-Ben](https://github.com/Kelvin-Ben)
-- Twitter: [@kevoyout144](https://twitter.com/kevoyout144)
-- LinkedIn: [Kelvin-Ben](https://www.linkedin.com/in/kelvin-ben-323043173/)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
