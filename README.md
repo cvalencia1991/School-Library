@@ -54,9 +54,9 @@
 
 
 ### Key Features <a name="key-features"></a>
-
-- **Explain the difference between classes and objects.**
 - **Implement classes and objects in Ruby.**
+- **Implement encapsulation and inheritance with Ruby.**
+- **Implement composition (as an example of the design pattern).**
 - **Run a program using the command line.**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -120,13 +120,11 @@ Example command:
 
 To run the project, execute the following command:
 
-<!--
-Example command:
 
 ```sh
-  rails server
+ Ruby person.rb
 ```
---->
+
 
 ### Run tests
 
@@ -144,13 +142,13 @@ Example command:
 
 You can deploy this project using:
 
-<!--
+
 Example:
 
 ```sh
-
+ ruby person.rb
 ```
- -->
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
