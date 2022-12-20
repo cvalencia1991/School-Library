@@ -1,6 +1,5 @@
 require './nameable'
 class Person < Nameable
-
   def initialize(age, name = 'Unknown', parent_permission: true)
     super()
     @id = Random.range(1..100)
@@ -27,7 +26,6 @@ class Person < Nameable
   end
 
   def correct_name
-    "#{@name}"
+    @name.to_s
   end
-
 end
