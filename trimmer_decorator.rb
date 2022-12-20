@@ -1,16 +1,12 @@
 require './decorator'
 
-class TrimmerDecorator < Decorator
-  def initialize(decorator)
-    super()
-    @nameble = decorator
-  end
+class Trimmerdecorator < Decorator
 
   def correct_name
     if @nameable.correct_name.length <= 10
       @nameable.to_s
     else
-      @nameable.strip
+      @nameable.correct_name[0..9].to_s
     end
   end
 end
