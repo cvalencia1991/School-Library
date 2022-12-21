@@ -57,6 +57,7 @@
 - **Implement classes and objects in Ruby.**
 - **Implement encapsulation and inheritance with Ruby.**
 - **Implement composition (as an example of the design pattern).**
+- **Set up associations between classes and objects.**
 - **Run a program using the command line.**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
