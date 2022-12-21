@@ -12,7 +12,7 @@ class Person < Nameable
     @name = name
     @age = age
     @parent_permission = parent_permission
-    @rental = []
+    @rentals = []
   end
 
   private
@@ -34,7 +34,7 @@ class Person < Nameable
   end
 
   def add_person_rental(date)
-    @rental.push(date)
+    @rentals.push(date)
   end
 end
 
