@@ -6,7 +6,7 @@ class Student < Person
 
   def initialize(*person, classroom)
     super(*person)
-    classroom.students.push(self) unless classroom.students.include?(self)
+    classroom.student.push(self) unless classroom.student.include?(self)
   end
 
   def play_hooky
