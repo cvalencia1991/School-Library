@@ -11,5 +11,4 @@ class Rentals
 
   book.rentals << self
   person.rentals << self
-
 end
