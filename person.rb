@@ -35,7 +35,7 @@ class Person < Nameable
 
   def add_person_rental(date)
     @rental.push(date)
-
+  end
 end
 
 person = Person.new(22, 'maximilianus')
