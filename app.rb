@@ -97,7 +97,7 @@ class App
     print 'Date: '
     date = gets.chomp
     @rental.push(Rentals.new(date, @books[book_index], @people[person_index]))
-    @rentals << rental unless @rentals.include?(rental)
+    # @rentals << rental unless @rentals.include?(rental)
     puts 'Rental created successfully'
   end
 
