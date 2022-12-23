@@ -32,9 +32,10 @@ class App
   end
 
   def quit
-    print "thank you for using this App!"
+    print 'thank you for using this App!'
     exit
   end
+
   def run
     puts 'Welcome to School Library App!'
     loop do
