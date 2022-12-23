@@ -4,16 +4,6 @@ require './book'
 require './rental'
 
 class App
-  OPERATIONS = {
-    1 => :list_books,
-    2 => :list_people,
-    3 => :create_person,
-    4 => :create_book,
-    5 => :create_rental,
-    6 => :list_rentals_for_person_id,
-    7 => :quit
-  }.freeze
-
   def initialize
     @books = []
     @people = []
@@ -38,10 +28,18 @@ class App
 
   def run
     puts 'Welcome to School Library App!'
+
+    actions = {
+      1 => :list_books, 2 => :list_people,
+      3 => :create_person, 4 => :create_book,
+      5 => :create_rental, 6 => :list_rentals_for_person_id,
+      7 => :quit
+    }
+
     loop do
       show_interactive_console
       option = gets.chomp.to_i
-      operation = OPERATIONS[option]
+      operation = actions[option]
       if operation == :quit
         break
       elsif operation
@@ -53,19 +51,11 @@ class App
   end
 
   def list_books
-    if @books.empty?
-      puts 'No books found'
-    else
-      @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
-    end
+    @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
   end
 
   def list_people
-    if @people.empty?
-      puts 'No people found'
-    else
-      @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
-    end
+    @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
   end
 
   def create_person
