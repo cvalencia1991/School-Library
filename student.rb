@@ -1,12 +1,11 @@
 require './person'
-require './classroom'
 
 class Student < Person
-  attr_accessor :classroom
+  attr_reader :classroom
 
-  def initialize(*person, classroom)
-    super(*person)
-    classroom.student.push(self) unless classroom.student.include?(self)
+  def classroom=(classroom)
+    @classroom = classroom
+    classroom.students << self unless classroom.students.include?(self)
   end
 
   def play_hooky
