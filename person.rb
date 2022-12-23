@@ -6,13 +6,14 @@ class Person < Nameable
   attr_accessor :name, :age
   attr_reader :id, :date
 
-  def initialize(age, name, parent_permission: true)
+  def initialize(age, name, parent_permission)
     super()
     @id = Random.rand(1..100)
     @name = name
     @age = age
     @parent_permission = parent_permission
     @rentals = []
+    @people = []
   end
 
   private
@@ -31,9 +32,5 @@ class Person < Nameable
 
   def correct_name
     @name.to_s
-  end
-
-  def add_person_rental(date)
-    @rentals.push(date)
   end
 end

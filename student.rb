@@ -3,10 +3,12 @@ require './classroom'
 
 class Student < Person
   attr_accessor :classroom
+  attr_reader :students
 
-  def initialize(*person, classroom)
+  def initialize(*person, classroom, type: 'student')
     super(*person)
-    classroom.student.push(self) unless classroom.student.include?(self)
+    @type = type
+    classroom.students.push(self) unless classroom.students.include?(self)
   end
 
   def play_hooky
