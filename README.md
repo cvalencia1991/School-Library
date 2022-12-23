@@ -59,6 +59,7 @@
 - **Implement composition (as an example of the design pattern).**
 - **Set up associations between classes and objects.**
 - **Run a program using the command line.**
+- **Build interactive console apps.**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -91,6 +92,7 @@ Example command:
 ```sh
 Ruby -v
 Visual Studio Code
+WSl or ubuntu
 ```
 
 ### Setup
@@ -123,7 +125,7 @@ To run the project, execute the following command:
 
 
 ```sh
- Ruby person.rb
+ Ruby main.rb
 ```
 
 
@@ -143,11 +145,8 @@ Example command:
 
 You can deploy this project using:
 
-
-Example:
-
 ```sh
- ruby person.rb
+ ruby main.rb
 ```
 
 
@@ -173,9 +172,9 @@ Example:
 
 > Describe 1 - 3 features you will add to the project.
 
-- [ ] **[new_feature_1]**
-- [ ] **[new_feature_2]**
-- [ ] **[new_feature_3]**
+- [Deploy on screen] **deploy the project of a real interaction in page**
+- [Trow Error's ] **implement many restrictions to add the get a real interaction with the App**
+- [implement in other language ] **implement in other back-end language like Nodejs,phyton,etc.**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -209,13 +208,10 @@ I would like to thank to [postgresql](https://www.postgresql.org/)
 ## ❓ FAQ <a name="faq"></a>
 
 
-- **[Question_1]**
+- **which language can you implement this proyect**
 
-  - [Answer_1]
+  - you can implment with any type of back-end language
 
-- **[Question_2]**
-
-  - [Answer_2]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
