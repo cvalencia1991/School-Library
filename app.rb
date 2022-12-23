@@ -11,7 +11,7 @@ class App
     4 => :create_book,
     5 => :create_rental,
     6 => :list_rentals_for_person_id,
-    7 => :exit
+    7 => :quit
   }.freeze
 
   def initialize
@@ -31,13 +31,17 @@ class App
     puts '7 - Exit'
   end
 
+  def quit
+    print "thank you for using this App!"
+    exit
+  end
   def run
     puts 'Welcome to School Library App!'
     loop do
       show_interactive_console
       option = gets.chomp.to_i
       operation = OPERATIONS[option]
-      if operation == :exit
+      if operation == :quit
         break
       elsif operation
         send(operation)
