@@ -5,6 +5,11 @@ require './student'
 require './teacher'
 
 class App
+  def initialize
+    @books = []
+    @people = []
+  end
+
   def menu
     puts 'Please choose an option by enterin a number:'
     puts "
@@ -17,27 +22,6 @@ class App
     7 - Exit\n"
   end
 
-  # def option_menu(option)
-  #   case option
-  #   when 1
-  #     books_all
-  #   when 2
-  #     people_all
-  #   when 3
-  #     new_person
-  #   when 4
-  #     new_book
-  #   when 5
-  #     create_rental
-  #   when 6
-  #     list_rentals
-  #   when 7
-  #     exit
-  #   else
-  #     puts "Invalid option: #{option}"
-  #   end
-  # end
-
   def option_menu(option)
     actions = {
       1 => :books_all,
@@ -46,14 +30,35 @@ class App
       4 => :new_book,
       5 => :create_rental,
       6 => :list_rentals,
-      7 => :exit
+      7 => :quit_app
     }
     action = actions[option]
     if action.nil?
       puts "Invalid option: #{option}"
-      menu
     else
-      public_send(action)
+      send(action)
+    end
+    main
+  end
+
+  def quit_app
+    print 'thank you for using this app!'
+    exit
+  end
+
+  def people_all
+    if @people.empty?
+      puts 'No people found'
+    else
+      @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+    end
+  end
+
+  def books_all
+    if @books.empty?
+      puts 'No books found'
+    else
+      @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
     end
   end
 
@@ -65,6 +70,9 @@ class App
       newstudent
     when 2
       newteacher
+    else
+      print "select 1 or 2, you pick up wrong \n please do it again"
+      main
     end
   end
 
@@ -73,8 +81,10 @@ class App
     title = gets.chomp
     puts 'Author of the book: '
     author = gets.chomp
-    Book.new(title, author)
+    book = Book.new(title, author)
+    @books.push(book)
     print "Book Created Succesfully!\n"
+    main
   end
 
   def create_rental
@@ -100,10 +110,11 @@ class App
 
   def newstudent
     puts 'Age: '
-    age = gets.chomp
-    age = age.to_i
+    age = gets.chomp.to_i
     puts 'Name: '
-    name = gets.chomp
+    name = gets.chomp.to_s
+    puts 'class:'
+    classroom = gets.chomp.to_s
     puts 'Has parent permission?[Y/N]:'
     permission = gets.chomp.downcase
     case permission
@@ -113,27 +124,23 @@ class App
       parent_permission = true
     else
       puts 'Invalid input. Please enter Y or N.'
-      return
     end
-    Person.new(age, name, parent_permission)
+    student = Student.new(age, name, classroom, parent_permission)
+    @people.push(student)
     puts "Student created successfully!\n"
-    menu
+    main
   end
-end
 
-def newteacher
-  puts 'Age: '
-  age = gets.chomp.to_i
-  puts 'name: '
-  name = gets.chomp
-  if age.between?(0, 100)
-    puts 'Speacialization: '
-
+  def newteacher
+    puts 'Age: '
+    age = gets.chomp.to_i
+    puts 'name: '
+    name = gets.chomp
+    puts 'Specialization: '
     specialization = gets.chomp.to_s
-    Teacher.new(age, name, specialization)
-    print "Teacher Creater Succesfully!\n"
-    menu
-  else
-    puts "Invalid age. Please enter an age between 0 and 100.\n"
+    teacher = Teacher.new(age, name, specialization, parent_permission: true)
+    @people.push(teacher)
+    puts "Teacher created successfully!\n"
+    main
   end
 end
