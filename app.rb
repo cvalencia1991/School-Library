@@ -8,6 +8,7 @@ class App
   def initialize
     @books = []
     @people = []
+    @rental = []
   end
 
   def menu
@@ -22,23 +23,26 @@ class App
     7 - Exit\n"
   end
 
-  def option_menu(option)
+  def run
+    puts 'Welcome to School Library App!'
     actions = {
-      1 => :books_all,
-      2 => :people_all,
-      3 => :new_person,
-      4 => :new_book,
-      5 => :create_rental,
-      6 => :list_rentals,
-      7 => :quit_app
+      1 => :booksall, 2 => :people_all,
+      3 => :new_person, 4 => :new_book,
+      5 => :create_rental, 6 => :list_rentals,
+      7 => :exit
     }
-    action = actions[option]
-    if action.nil?
-      puts "Invalid option: #{option}"
-    else
-      send(action)
+    loop do
+      menu
+      option = gets.chomp.to_i
+      operation = actions[option]
+      if operation == :exit
+        break
+      elsif operation
+        send(operation)
+      else
+        puts 'That is not a valid input'
+      end
     end
-    main
   end
 
   def quit_app
@@ -54,12 +58,8 @@ class App
     end
   end
 
-  def books_all
-    if @books.empty?
-      puts 'No books found'
-    else
-      @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
-    end
+  def booksall
+    @books.each { |object| puts "Title: '#{object.title}', Author: #{object.author}" }
   end
 
   def new_person
@@ -72,32 +72,33 @@ class App
       newteacher
     else
       print "select 1 or 2, you pick up wrong \n please do it again"
-      main
     end
   end
 
   def new_book
-    puts 'Tittle of the book: '
-    title = gets.chomp
-    puts 'Author of the book: '
-    author = gets.chomp
-    book = Book.new(title, author)
-    @books.push(book)
-    print "Book Created Succesfully!\n"
-    main
+    puts 'Title: '
+    book_title = gets.chomp.to_s
+    puts 'Author: '
+    book_author = gets.chomp.to_s
+    list = Book.new(book_title, book_author)
+    @books.push(list)
+    puts 'Book created successfully'
   end
 
   def create_rental
     puts 'Select a book from the following list by number'
-    print "#{books_all}\n"
-    select_book = gets.chomp.to_i
-    puts 'Select a person from the following list by number(not id)'
-    print "#{people_all}\n"
-    select_person = gets.chomp.to_i
-    puts 'Date [yyyy-mm-dd]:'
+    @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
+    book_index = gets.chomp.to_i
+    puts 'Select a person from the following list by number (not id)'
+    @people.each_with_index do |person, index|
+      puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
+    person_index = gets.chomp.to_i
+    print 'Date: '
     date = gets.chomp
-    Rental.new(date, Person.all[select_person], Book.all[select_book])
-    print 'Rental created succesfully'
+    @rental.push(Rentals.new(date, @books[book_index], @people[person_index]))
+    @rentals << rental unless @rentals.include?(rental)
+    puts 'Rental created successfully'
   end
 
   def list_rentals
@@ -113,10 +114,9 @@ class App
     age = gets.chomp.to_i
     puts 'Name: '
     name = gets.chomp.to_s
-    puts 'class:'
-    classroom = gets.chomp.to_s
     puts 'Has parent permission?[Y/N]:'
     permission = gets.chomp.downcase
+
     case permission
     when 'n'
       parent_permission = false
@@ -125,22 +125,21 @@ class App
     else
       puts 'Invalid input. Please enter Y or N.'
     end
-    student = Student.new(age, name, classroom, parent_permission)
+    student = Student.new(age, name, parent_permission)
     @people.push(student)
     puts "Student created successfully!\n"
-    main
   end
 
   def newteacher
     puts 'Age: '
-    age = gets.chomp.to_i
+    age = gets.to_i
     puts 'name: '
     name = gets.chomp
     puts 'Specialization: '
     specialization = gets.chomp.to_s
-    teacher = Teacher.new(age, name, specialization, parent_permission: true)
+    parent_permission = true
+    teacher = Teacher.new(age, name, specialization, parent_permission)
     @people.push(teacher)
     puts "Teacher created successfully!\n"
-    main
   end
 end

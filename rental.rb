@@ -1,13 +1,13 @@
 require './book'
-require './person'
 
 class Rentals
   attr_accessor :date, :book, :person
 
-  def initialize(date, person)
+  def initialize(date, person, book)
     @date = date
     @person = person
-    book.rentals << self
-    person.rentals << self
+    @book = book
+    book.rentals << self unless book.rentals.include?(self)
+    person.rentals << self unless person.rentals.include?(self)
   end
 end

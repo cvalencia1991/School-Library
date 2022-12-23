@@ -4,7 +4,7 @@ require './trimmer_decorator'
 require './rental'
 class Person < Nameable
   attr_accessor :name, :age
-  attr_reader :id, :date
+  attr_reader :id, :rentals
 
   def initialize(age, name, parent_permission)
     super()
@@ -13,7 +13,6 @@ class Person < Nameable
     @age = age
     @parent_permission = parent_permission
     @rentals = []
-    @people = []
   end
 
   private
@@ -28,6 +27,10 @@ class Person < Nameable
 
   def can_use_services?
     of_age? || @parent_permission
+  end
+
+  def add_rental(date, book)
+    @rentals.push(Rental.new(date, book, self))
   end
 
   def correct_name
