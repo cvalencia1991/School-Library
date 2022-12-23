@@ -5,9 +5,14 @@ class Book
     @title = title
     @author = author
     @rentals = []
+    @books = []
   end
 
   def add_rentals(date)
     @rentals.push(date, @title, @author)
+  end
+
+  def books
+    books.push(@title, @author)
   end
 end
