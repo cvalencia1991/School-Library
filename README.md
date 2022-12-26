@@ -208,7 +208,7 @@ I would like to thank to [postgresql](https://www.postgresql.org/)
 ## ❓ FAQ <a name="faq"></a>
 
 
-- **which language can you implement this proyect**
+- **which language can you implement this proyect?**
 
   - you can implment with any type of back-end language
 
