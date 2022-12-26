@@ -1,61 +1,47 @@
-require './book'
-require './rental'
-require './person'
 require './student'
 require './teacher'
+require './book'
+require './rental'
 
 class App
   def initialize
     @books = []
     @people = []
     @rentals = []
-    add_first_book_person
   end
 
-  def add_first_book_person
-    system('cls')
-    person = Person.new(20,"cesar", true)
-    @people << person
-    book = Book.new("alfa","omega")
-    @books << book
-    rental = Rental.new('2012-02-01',@people[0],@books[0])
-    @rentals << rental
-    puts "this is people"
-    p @people
-    p person.rentals
-    puts "this is books"
-    p @books
-    p book.rentals
-    puts "this is rentals"
-    p @rentals
-    # exit
+  def show_interactive_console
+    puts ''
+    puts 'Please choose an option by entering a number:'
+    puts '1 - List all books'
+    puts '2 - List all people'
+    puts '3 - Create a person'
+    puts '4 - Create a book'
+    puts '5 - Create a rental'
+    puts '6 - List all rentals for a given person id'
+    puts '7 - Exit'
   end
 
-  def menu
-    puts 'Please choose an option by enterin a number:'
-    puts "
-    1 - List all Books\n
-    2 - List all people\n
-    3 - Create a Person\n
-    4 - Create Book\n
-    5 - Create a rental\n
-    6 - List all Rentals for a given person id\n
-    7 - Exit\n"
+  def quit
+    print 'thank you for using this App!'
+    exit
   end
 
   def run
     puts 'Welcome to School Library App!'
+
     actions = {
-      1 => :booksall, 2 => :people_all,
-      3 => :new_person, 4 => :new_book,
-      5 => :create_rental, 6 => :list_rentals,
-      7 => :quit_app
+      1 => :list_books, 2 => :list_people,
+      3 => :create_person, 4 => :create_book,
+      5 => :create_rental, 6 => :list_rentals_for_person_id,
+      7 => :quit
     }
+
     loop do
-      menu
+      show_interactive_console
       option = gets.chomp.to_i
       operation = actions[option]
-      if operation == :quit_app
+      if operation == :quit
         break
       elsif operation
         send(operation)
@@ -65,44 +51,60 @@ class App
     end
   end
 
-  def quit_app
-    print 'thank you for using this app!'
-    exit
+  def list_books
+    @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
   end
 
-  def people_all
-    if @people.empty?
-      puts 'No people found'
-    else
-      @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
-    end
+  def list_people
+    @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
   end
 
-  def booksall
-    @books.each { |object| puts "Title: '#{object.title}', Author: #{object.author}" }
-  end
-
-  def new_person
-    puts 'Do you want to create a student (1) or a teacher (2) :'
-    option_person = gets.chomp.to_i
-    case option_person
+  def create_person
+    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
+    option = gets.chomp.to_i
+    case option
     when 1
-      newstudent
+      create_student
     when 2
-      newteacher
+      create_teacher
     else
-      print "select 1 or 2, you pick up wrong \n please do it again"
+      puts 'That is not a valid input'
     end
   end
 
-  def new_book
-    puts 'Title: '
-    book_title = gets.chomp.to_s
-    puts 'Author: '
-    book_author = gets.chomp.to_s
-    list = Book.new(book_title, book_author)
-    @books.push(list)
+  def create_student
+    print 'Age: '
+    age = gets.chomp.to_i
+    print 'Name: '
+    name = gets.chomp
+    print 'Has parent permission? [Y/N]: '
+    parent_permission = gets.chomp
+    parent_permission = parent_permission.downcase == 'y'
+    student = Student.new(age, name, parent_permission)
+    puts 'Person created successfully'
+    @people.push(student)
+  end
+
+  def create_teacher
+    print 'Age: '
+    age = gets.chomp.to_i
+    print 'Name: '
+    name = gets.chomp
+    print 'Specialization: '
+    specialization = gets.chomp
+    teacher = Teacher.new(age, specialization, name)
+    puts 'Person created successfully'
+    @people.push(teacher)
+  end
+
+  def create_book
+    print 'Title: '
+    title = gets.chomp
+    print 'Author: '
+    author = gets.chomp
+    book = Book.new(title, author)
     puts 'Book created successfully'
+    @books.push(book)
   end
 
   def create_rental
@@ -116,53 +118,20 @@ class App
     person_index = gets.chomp.to_i
     print 'Date: '
     date = gets.chomp
-    rental = Rental.new(date, @people[person_index], @books[book_index])
-    @rentals << rental unless @rentals.include?(rental)
+    Rental.new(date, @people[person_index], @books[book_index])
     puts 'Rental created successfully'
   end
 
-  def list_rentals
-    print 'Id of person:'
-    id_person = gets.chomp
-    id_person = id_person.to_i
+  def list_rentals_for_person_id
+    print 'ID of person: '
+    id = gets.chomp.to_i
+    puts 'Rentals:'
+    @people.each do |person|
+      next unless person.id == id
 
-    puts 'Rentals'
-    @rentals.each do |rental|
-      puts "Date: #{rental.date} Book: #{rental.book.title} by #{rental.book.author} " if rental.person.id == id_person
+      person.rentals.each do |rental|
+        puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}"
+      end
     end
-  end
-
-  def newstudent
-    puts 'Age: '
-    age = gets.chomp.to_i
-    puts 'Name: '
-    name = gets.chomp.to_s
-    puts 'Has parent permission?[Y/N]:'
-    permission = gets.chomp.downcase
-
-    case permission
-    when 'n'
-      parent_permission = false
-    when 'y'
-      parent_permission = true
-    else
-      puts 'Invalid input. Please enter Y or N.'
-    end
-    student = Student.new(age, name, parent_permission)
-    @people.push(student)
-    puts "Student created successfully!\n"
-  end
-
-  def newteacher
-    puts 'Age: '
-    age = gets.to_i
-    puts 'name: '
-    name = gets.chomp
-    puts 'Specialization: '
-    specialization = gets.chomp.to_s
-    parent_permission = true
-    teacher = Teacher.new(age, name, specialization, parent_permission)
-    @people.push(teacher)
-    puts "Teacher created successfully!\n"
   end
 end
