@@ -8,7 +8,27 @@ class App
   def initialize
     @books = []
     @people = []
-    @rental = []
+    @rentals = []
+    add_first_book_person
+  end
+
+  def add_first_book_person
+    system('cls')
+    person = Person.new(20,"cesar", true)
+    @people << person
+    book = Book.new("alfa","omega")
+    @books << book
+    rental = Rental.new('2012-02-01',@people[0],@books[0])
+    @rentals << rental
+    puts "this is people"
+    p @people
+    p person.rentals
+    puts "this is books"
+    p @books
+    p book.rentals
+    puts "this is rentals"
+    p @rentals
+    # exit
   end
 
   def menu
@@ -96,8 +116,8 @@ class App
     person_index = gets.chomp.to_i
     print 'Date: '
     date = gets.chomp
-    @rental.push(Rentals.new(date, @books[book_index], @people[person_index]))
-    # @rentals << rental unless @rentals.include?(rental)
+    rental = Rental.new(date, @people[person_index], @books[book_index])
+    @rentals << rental unless @rentals.include?(rental)
     puts 'Rental created successfully'
   end
 

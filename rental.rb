@@ -1,13 +1,22 @@
 require './book'
 
-class Rentals
+class Rental
   attr_accessor :date, :book, :person
 
-  def initialize(date, person, book)
+  def initialize(date = Time.now,person, book)
     @date = date
-    @person = person
-    @book = book
-    # book.rentals << self unless book.rentals.include?(self)
-    # person.rentals << self unless person.rentals.include?(self)
+    self.person = person
+    self.book = book
   end
+
+  def person=(person)
+    @person = person
+    person.rentals << self unless person.rentals.include?(self)
+  end
+
+  def book=(book)
+    @book = book
+    book.rentals << self unless book.rentals.include?(self)
+  end
+
 end
