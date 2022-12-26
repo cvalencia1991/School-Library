@@ -29,13 +29,13 @@ class App
       1 => :booksall, 2 => :people_all,
       3 => :new_person, 4 => :new_book,
       5 => :create_rental, 6 => :list_rentals,
-      7 => :exit
+      7 => :quit_app
     }
     loop do
       menu
       option = gets.chomp.to_i
       operation = actions[option]
-      if operation == :exit
+      if operation == :quit_app
         break
       elsif operation
         send(operation)
