@@ -32,14 +32,4 @@ class Person < Nameable
   def add_rental(book, date)
     @rentals.push(Rental.new(date, self, book))
   end
-
-  private
-
-  def of_age?(age)
-    true if age >= 18
-
-    false
-  end
-
-
 end
