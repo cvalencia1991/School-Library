@@ -7,6 +7,7 @@ class App
   def initialize
     @books = []
     @people = []
+    @rentals = []
   end
 
   def show_interactive_console

@@ -1,7 +1,6 @@
 require './nameable'
 require 'date'
 require './rental'
-
 class Person < Nameable
   def initialize(age, name, parent_permission)
     super()
